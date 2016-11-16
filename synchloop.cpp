@@ -197,9 +197,9 @@ void SynchLoop::run_private(){
         ar_buffer->fillFlag=1;
         ar_buffer->time_sec=(ARUint32)QDateTime::currentMSecsSinceEpoch()/1000;
         ar_buffer->time_usec=(ARUint32)QDateTime::currentMSecsSinceEpoch()-ar_buffer->time_sec*1000;
-        ar_buffer->buffLuma=ar_buffer->buff;
+        //ar_buffer->buffLuma=ar_buffer->buff;
 
-        if (arDetectMarker(ar_handle, ar_buffer) < 0) {
+        if (arDetectMarker(ar_handle, ar_buffer->buff) < 0) {
             qDebug()<<"Error in arDetectMarker";
             continue;
         }

@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
     QCommandLineOption fixationFile("fixation", "Fixation file","Fixation file");
     parser.addOption(fixationFile);
 
-    QCommandLineOption interactive("interactive", "Interactive","Interactive");
+    QCommandLineOption interactive("interactive", "Interactive");
     parser.addOption(interactive);
 
     QCommandLineOption subtitles("subs", "Generate subtitles");
@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
 
     view.resize(200, 200);
     view.setResizeMode(QQuickView::SizeViewToRootObject);
-    view.setSource(QUrl("qrc:/main_synch_loop.qml"));
+    view.setSource(QUrl("qrc:/main.qml"));
 
     view.show();
 
@@ -58,6 +58,9 @@ int main(int argc, char *argv[])
         view.rootContext()->setContextProperty("interactive",true);
     else
         view.rootContext()->setContextProperty("interactive",false);
+
+    QString current_image_path=QString("file://")+QDir::currentPath()+QString("/current_frame.png");
+    view.rootContext()->setContextProperty("current_image_path",current_image_path);
 
     QObject::connect(view.rootObject(), SIGNAL(quit()), qApp, SLOT(quit()));
     return app.exec();

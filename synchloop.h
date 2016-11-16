@@ -12,6 +12,8 @@ extern "C"{
 #include <AR/config.h>
 #include <AR/arFilterTransMat.h>
 #include <AR/arMulti.h>
+#include <AR/video.h>
+
 }
 #include <QTime>
 #include <QMatrix4x4>
@@ -103,7 +105,7 @@ private:
     ARHandle* ar_handle;
     AR3DHandle* ar_3d_handle;
     ARPattHandle* ar_patt_handle;
-    AR_MATRIX_CODE_TYPE matrix_code_type=AR_MATRIX_CODE_4x4_BCH_13_9_3;
+    AR_MATRIX_CODE_TYPE matrix_code_type=AR_MATRIX_CODE_3x3;
 
 
     QMatrix4x4 projectionMatrix;

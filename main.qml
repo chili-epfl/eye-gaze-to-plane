@@ -22,16 +22,15 @@ Item {
             setInteractive(interactive)
             setFileVideoFileName(video_file,skip_intervals)
             loadGazeData(gaze_data_file)
-            loadMultiMarkersConfigFile("default","/home/chili/board_configuration.data")
-            loadMultiMarkersConfigFile("tablet","/home/chili/QTProjects/EyeTrackingExtractAOIHits/tablet_tags.data")
-            loadMesh("/home/chili/QTProjects/EyeTrackingExtractAOIHits/tablet_mesh.obj","tablet")
+            loadMultiMarkersConfigFile("paper_map","/home/chili/QTProjects/arzu_paper.data")
+            loadMesh("/home/chili/QTProjects/paper_mesh.obj","paper_map")
             run();
         }
 
         onSuggestionChanged: suggestion_field.text=suggestion
         onCurrent_frameChanged: {
             image_current_frame.source=""
-            image_current_frame.source="file:///home/chili/QTProjects/build-EyeTrackingExtractAOIHits-Desktop_Qt_5_6_0_GCC_64bit-Debug/current_frame.png"
+            image_current_frame.source=current_image_path
         }
     }
 
