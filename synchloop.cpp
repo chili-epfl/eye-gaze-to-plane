@@ -130,12 +130,17 @@ void SynchLoop::loadGazeData(QString file_name){
             qDebug()<<"Invalid file format for gaze data";
             return;
         }
-
+        if(parts[2].contains("nan",Qt::CaseInsensitive) ||
+                parts[3].contains("nan",Qt::CaseInsensitive) ||
+                parts[2].toDouble()<0 ||
+                parts[3].toDouble()<0)
+           continue;
         if(parts[1]!=event_type && parts[1]=="Visual Intake")
             fixationGroup++;
         event_type=parts[1];
 
         QVector2D pos(parts[2].toDouble(),parts[3].toDouble());
+
         QString timestamp=parts[4];
         QStringList timestamp_parts=timestamp.split(':');
         int frame;
@@ -242,7 +247,9 @@ void SynchLoop::run_private(){
             Q_FOREACH(auto fixation,fixations.values(frame_counter)){
                 QVector2D gaze_point=fixation.first;
                 //If the movement in the image is low or the gaze didn't move much we use the latest AOI
-                if(nonZero<0.3*cameraSize.width()*cameraSize.height() && prev_gaze.distanceToPoint(gaze_point)<20){
+                //arzu changed
+                if(false){
+                //if(nonZero<0.3*cameraSize.width()*cameraSize.height() && prev_gaze.distanceToPoint(gaze_point)<20){
                     hitAOI=latest_AOI;
                 }
                 else{
@@ -490,10 +497,12 @@ QString SynchLoop::select_on_mesh(QVector2D mouseXYNormalized,qreal &tnear){
             triangle[1]=mesh_vertices_objects[AOI][triangle_face[1]-1];
             triangle[2]=mesh_vertices_objects[AOI][triangle_face[2]-1];
             qreal t_near;
-            if(checkIntersectionRay_Triangle(ray_transform,triangle,t_near)){
+            QString pos;
+            if(checkIntersectionRay_Triangle(ray_transform,triangle,t_near,pos)){
                 if(t_near<hitEntity_tnear){
                     hitEntity_tnear=t_near;
-                    hitEntity=AOI;
+                    //hitEntity=AOI;
+                    hitEntity=pos;
                 }
             }
         }
@@ -504,7 +513,7 @@ QString SynchLoop::select_on_mesh(QVector2D mouseXYNormalized,qreal &tnear){
 }
 
 /*Based on http://geomalgorithms.com/a06-_intersect-2.html#intersect3D_RayTriangle%28%29*/
-bool SynchLoop::checkIntersectionRay_Triangle(const Qt3DCore::QRay3D ray, const QVector<QVector3D> triangle,qreal &tnear){
+bool SynchLoop::checkIntersectionRay_Triangle(const Qt3DCore::QRay3D ray, const QVector<QVector3D> triangle,qreal &tnear,QString& pos ){
     if(triangle.size()!=3){qWarning()<<"Triangle doesn't have 3 points!";return false;}
 
     QVector3D u=triangle[1]-triangle[0]; //precomputable
@@ -552,6 +561,11 @@ bool SynchLoop::checkIntersectionRay_Triangle(const Qt3DCore::QRay3D ray, const 
         return false;
 
     tnear=r;
+
+    pos=QString::number(P.x())+","+QString::number(P.y());
+    //fixationsAOI.insert(frame_counter,pos);
+    
+    //qDebug()<<P;
 
     return 1;                       // I is in T
 }

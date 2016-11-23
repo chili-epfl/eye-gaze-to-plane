@@ -105,7 +105,8 @@ private:
     ARHandle* ar_handle;
     AR3DHandle* ar_3d_handle;
     ARPattHandle* ar_patt_handle;
-    AR_MATRIX_CODE_TYPE matrix_code_type=AR_MATRIX_CODE_3x3;
+    AR_MATRIX_CODE_TYPE matrix_code_type=AR_MATRIX_CODE_4x4_BCH_13_9_3;
+    //AR_MATRIX_CODE_TYPE matrix_code_type=AR_MATRIX_CODE_3x3;
 
 
     QMatrix4x4 projectionMatrix;
@@ -125,7 +126,7 @@ private:
 
     void setupCameraParameters();
     void setupMarkerParameters();
-    bool checkIntersectionRay_Triangle(const Qt3DCore::QRay3D ray, const QVector<QVector3D> triangle, qreal &tnear);
+    bool checkIntersectionRay_Triangle(const Qt3DCore::QRay3D ray, const QVector<QVector3D> triangle, qreal &tnear,QString& pos );
     void run_private();
 
     QString select_on_mesh(QVector2D mouseXYNormalized, qreal &tnear);

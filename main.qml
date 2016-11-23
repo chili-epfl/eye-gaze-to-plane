@@ -3,8 +3,8 @@ import QtQuick.Controls 1.4
 import SynchLoop 1.0
 Item {
     visible: true
-    width: 1280
-    height: 960
+    width: 980
+    height: 660
     signal quit()
     focus: true
 
@@ -22,8 +22,8 @@ Item {
             setInteractive(interactive)
             setFileVideoFileName(video_file,skip_intervals)
             loadGazeData(gaze_data_file)
-            loadMultiMarkersConfigFile("paper_map","/home/chili/QTProjects/arzu_paper.data")
-            loadMesh("/home/chili/QTProjects/paper_mesh.obj","paper_map")
+            loadMultiMarkersConfigFile("paper_map","/home/arzu/arzu_papernew.data")
+            loadMesh("/home/arzu/paper_mesh.obj","paper_map")
             run();
         }
 
