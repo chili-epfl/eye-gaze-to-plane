@@ -2,26 +2,23 @@ Tool to map eye tracking raw data to a reference map including multiple ARTags.
 It gets ".avi"" eye tracking video file and eye tracking raw data in ".txt". 
 Then calculates x and y positions of eye gaze in a reference map. 
 
-------------------------------------------------------
+
 input format of eye gaze raw data: 
 
-"Time of Day [h:m:s:ms]","Participant","Point of Regard Binocular X [px]","Point of Regard Binocular Y [px]","Video Time [h:m:s:ms]"
+"Time of Day ","Participant","Point of Regard Binocular X [px]","Point of Regard Binocular Y [px]","Video Time"
 "15:49:54:466","john",0,0,"00:00:00:000"
 "15:49:54:499","john",1971.8,2067.5,"00:00:00:042"
 "15:49:54:533","john",670.8,1124.4,"00:00:00:042"
 "15:49:54:566","john",931.7,933.5,"00:00:00:083"
 "15:49:54:599","john",927.9,930.8,"00:00:00:125"
--------------------------------------------------------
+
 
 As the output it creates a ".txt"" file including the input eyegaze raw data and calculated x,y positions on the reference map and frame number of each instance. 
 
--------------------------------------------------------------------------
 output format:
 
-"Time of Day [h:m:s:ms]","Participant","BinocularX[px]","BinocularY[px]","VideoTime[h:m:s:ms]",0value,xpos,ypos,framecount
+"Time of Day [hh:mm:ss:ms]","Participant","BinocularX[px]","BinocularY[px]","VideoTime[hh:mm:ss:ms]",0value,xpos,ypos,framecount
 "15:34:09:485","ali",927.4,846.1,"00:01:10:080",0,354.632,-153.861,0:1:10:0
---------------------------------------------------------------------------
-
 
 In order to detect the reference map position in the video it uses ARTag positions which are printed to the reference map. ArTag positions, rotations and numbers should be added to a configuration file and should be set in main.qml 
 
