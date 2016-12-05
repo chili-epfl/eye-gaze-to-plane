@@ -124,7 +124,7 @@ void SynchLoop::loadGazeData(QString file_name){
     QString line;
     while(!stream.atEnd()){
         line=readLine(&stream);
-        QStringList parts=line.split("\t");
+        QStringList parts=line.split(",");
 
         if(parts.size()!=5){
             qDebug()<<"Invalid file format for gaze data";
