@@ -124,7 +124,7 @@ void SynchLoop::loadGazeData(QString file_name){
     QString line;
     while(!stream.atEnd()){
         line=readLine(&stream);
-        QStringList parts=line.split(",");
+        QStringList parts=line.split("\t");
 
         if(parts.size()!=5){
             qDebug()<<"Invalid file format for gaze data";
@@ -314,6 +314,10 @@ void SynchLoop::run_private(){
             int mm=(timestamp-hh*3600*fps)/(60*fps);
             int ss=(timestamp-hh*3600*fps - mm*60*fps)/fps;
             int fms=timestamp-hh*3600*fps - mm*60*fps - ss*fps;
+
+            if(AOI.isEmpty()){
+                AOI="0,0";
+            }
             file_with_AOI_stream<<fixations_at_timestamp[fixations_at_timestamp.size()-i].second<<","<<AOI<<","<<QString::number(hh)<<":"
                                <<QString::number(mm)<<":"<<QString::number(ss)<<":"<<fms<<"\n";
             i++;
