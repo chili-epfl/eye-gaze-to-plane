@@ -6,11 +6,7 @@ Then calculates x and y positions of eye gaze in a reference map.
 input format of eye gaze raw data: 
 
 "Time of Day ","Participant","Point of Regard Binocular X [px]","Point of Regard Binocular Y [px]","Video Time"
-"15:49:54:466","john",0,0,"00:00:00:000"
-"15:49:54:499","john",1971.8,2067.5,"00:00:00:042"
-"15:49:54:533","john",670.8,1124.4,"00:00:00:042"
 "15:49:54:566","john",931.7,933.5,"00:00:00:083"
-"15:49:54:599","john",927.9,930.8,"00:00:00:125"
 
 
 As the output it creates a ".txt"" file including the input eyegaze raw data and calculated x,y positions on the reference map and frame number of each instance. 
